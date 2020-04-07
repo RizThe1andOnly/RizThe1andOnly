@@ -36,7 +36,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ComboBox id="pizzaTypeBox" fx:id="pizzaTypeBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ComboBox id="pizzaTypeBox" fx:id="pizzaTypeBox" onAction="#lockToppings" prefWidth="150.0" GridPane.columnIndex="1" />
                         <ComboBox id="pizzaSizeBox" fx:id="pizzaSizeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="pizzaTypeLabel" text="Select Pizza Type">
                            <padding>
@@ -51,34 +51,36 @@
                         <Insets bottom="10.0" left="24.0" />
                      </padding>
                   </GridPane>
-                  <HBox id="toppingHBox" fx:id="toppingHBox" prefHeight="244.0" prefWidth="280.0">
+                  <VBox fx:id="toppingVBoxMain" prefHeight="272.0" prefWidth="314.0">
                      <children>
-                        <ListView id="toppingOptionListBox" fx:id="toppingOptionsListBox" prefHeight="244.0" prefWidth="156.0" />
-                        <ListView id="toppingSelectedListBox" fx:id="toppingSelectedListBox" prefHeight="244.0" prefWidth="155.0" />
+                        <HBox id="toppingHBox" fx:id="toppingHBox" prefHeight="244.0" prefWidth="280.0">
+                           <children>
+                              <ListView id="toppingOptionListBox" fx:id="toppingOptionsListBox" prefHeight="244.0" prefWidth="156.0" />
+                              <ListView id="toppingSelectedListBox" fx:id="toppingSelectedListBox" prefHeight="244.0" prefWidth="155.0" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="toppingCommandHbox" alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="382.0">
+                           <children>
+                              <Button id="addToppingsButton" fx:id="addToppingsButton" mnemonicParsing="false" onAction="#addSelectedToppings" prefHeight="24.0" prefWidth="156.0" text="Add Toppings&gt;&gt;">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#removeSelectedToppings" prefHeight="24.0" prefWidth="155.0" text="&lt;&lt;Remove Toppings">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="1.0" />
+                           </padding>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="382.0">
-                     <children>
-                        <Button id="addToppingsButton" fx:id="addToppingsButton" mnemonicParsing="false" onAction="#addSelectedToppings" text="Add Toppings&gt;&gt;">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" text="&lt;&lt;Remove Toppings">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Button>
-                        <Button id="clearToppingsButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="93.0" text="Clear Toppings">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
             <VBox id="viewingBox" fx:id="viewingBox" alignment="BOTTOM_RIGHT" prefHeight="349.0" prefWidth="262.0">

@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +32,8 @@ public class SelectionPageController implements Initializable {
     private ListView<String> toppingOptionsListBox;
     @FXML
     private ListView<String> toppingSelectedListBox;
+    @FXML
+    private VBox toppingVBoxMain;
 
     //text area for messages
     @FXML
@@ -139,6 +142,22 @@ public class SelectionPageController implements Initializable {
 
 
     /**
+     * When called will remove all items from the selected toppings list.
+     *
+     * @author Rizwan Chowhdury
+     * @author Tin Fung
+     */
+    private void clearSelectedToppings(){
+        // base case/ just in case
+        if( (selectedToppings.size() == 0) || (selectedToppings==null) ){
+            return;
+        }
+
+        selectedToppings.clear();
+    }
+
+
+    /**
      * Will be called when Add Toppings>> button is pressed. Will take the slected items in the
      * available toppings listview and add them to the selected toppings list. Since two of the
      * same topping not allowed checks will be made to make sure this does not happen.
@@ -166,6 +185,7 @@ public class SelectionPageController implements Initializable {
      * Helper method to check if element being added already exists in selected Topping list.
      * @param toppingsBuffer list of toppings that are to be added to the selected list
      * @return true if there is an element that exists in both lists, false otherwise
+     * @author Rizwan Chowdhury
      */
     private boolean alreadyContainsTopping(ObservableList<String> toppingsBuffer){
         //base case: when selected toppings is empty
@@ -180,6 +200,45 @@ public class SelectionPageController implements Initializable {
         }
 
         return false;
+    }
+
+
+    /**
+     * Activated when user presses the Remove Toppings button. It removes selected toppings
+     * from the selectedToppings list.
+     * @param e pressing of the Remove Toppings button
+     * @author Rizwan Chowdhury
+     */
+    @FXML
+    public void removeSelectedToppings(ActionEvent e){
+        ObservableList<String> toBeRemovedBuffer = toppingSelectedListBox.getSelectionModel().getSelectedItems();
+        for(String toBeRemoved : toBeRemovedBuffer){
+            selectedToppings.remove(toBeRemoved);
+            if(selectedToppings.size() == 0){
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * When Hawaiian or Deluxe is selected as pizza style the toppings section will be locked, since
+     * for Hawaiian and Deluxe customers cannot choose their own toppings. Will also clear the selected toppings
+     * list when switching to Hawaiian or Deluxe.
+     * @param e Selection of a style in the Pizza Style combo box.
+     *
+     * @author Rizwan Chowdhury
+     */
+    @FXML
+    public void lockToppings(ActionEvent e){
+        String pizzastyle = pizzaTypeBox.getSelectionModel().getSelectedItem();
+        clearSelectedToppings();
+        if( (pizzastyle.equals(HAWAIIAN)) || (pizzastyle.equals(DELUXE)) ){
+            toppingVBoxMain.setDisable(true);
+        }
+        else{
+            toppingVBoxMain.setDisable(false);
+        }
     }
 
 }
