@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program4GUI.SelectionPageController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program4GUI.SelectionPageController">
    <children>
-      <HBox id="commandButtonBox" fx:id="commandButtonBox" prefHeight="50.0" prefWidth="600.0">
+      <HBox id="commandButtonBox" fx:id="commandButtonBox" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" text="Clear Order" />
             <Button id="addButton" fx:id="addButton" mnemonicParsing="false" text="Add Order" />
+            <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" text="Clear Order" />
             <Button id="viewOrderButton" fx:id="viewOrderButton" mnemonicParsing="false" text="View Orders" />
             <Button id="doneButton" fx:id="doneButton" mnemonicParsing="false" text="Done" />
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </HBox>
-      <HBox id="contentBox" fx:id="contentBox" prefHeight="349.0" prefWidth="600.0">
+      <HBox id="contentBox" fx:id="contentBox" prefHeight="349.0" prefWidth="595.0">
          <children>
-            <VBox id="pizzaSelectionSection" fx:id="pizzaSelectionSection" prefHeight="349.0" prefWidth="386.0">
+            <VBox id="pizzaSelectionSection" fx:id="pizzaSelectionSection" alignment="BOTTOM_LEFT" prefHeight="349.0" prefWidth="314.0">
                <children>
                   <GridPane id="pizzaSelectionGridPane" fx:id="pizzaSelectionGridPane">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="131.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" prefWidth="149.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -30,29 +38,53 @@
                      <children>
                         <ComboBox id="pizzaTypeBox" fx:id="pizzaTypeBox" prefWidth="150.0" GridPane.columnIndex="1" />
                         <ComboBox id="pizzaSizeBox" fx:id="pizzaSizeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="pizzaTypeLabel" text="Select Pizza Type" />
-                        <Label fx:id="pizzaSizeLabel" text="Select Pizza Size" GridPane.rowIndex="1" />
+                        <Label fx:id="pizzaTypeLabel" text="Select Pizza Type">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding></Label>
+                        <Label fx:id="pizzaSizeLabel" text="Select Pizza Size" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding></Label>
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="24.0" />
+                     </padding>
                   </GridPane>
-                  <HBox id="toppingHBox" fx:id="toppingHBox" prefHeight="215.0" prefWidth="382.0">
+                  <HBox id="toppingHBox" fx:id="toppingHBox" prefHeight="244.0" prefWidth="280.0">
                      <children>
-                        <ListView id="toppingOptionListBox" fx:id="toppingOptionsListBox" prefHeight="215.0" prefWidth="127.0" />
-                        <ListView id="toppingSelectedListBox" fx:id="toppingSelectedListBox" prefHeight="215.0" prefWidth="120.0" />
-                        <VBox id="toppingCommandBox" fx:id="toppingCommandBox" prefHeight="215.0" prefWidth="137.0">
-                           <children>
-                              <Button id="addToppingsButton" fx:id="addToppingsButton" mnemonicParsing="false" text="Add Toppings&gt;&gt;" />
-                              <Button mnemonicParsing="false" text="&lt;&lt;Remove Toppings" />
-                              <Button id="clearToppingsButton" mnemonicParsing="false" text="Clear Toppings" />
-                           </children>
-                        </VBox>
+                        <ListView id="toppingOptionListBox" fx:id="toppingOptionsListBox" prefHeight="244.0" prefWidth="156.0" />
+                        <ListView id="toppingSelectedListBox" fx:id="toppingSelectedListBox" prefHeight="244.0" prefWidth="155.0" />
                      </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="382.0">
+                     <children>
+                        <Button id="addToppingsButton" fx:id="addToppingsButton" mnemonicParsing="false" onAction="#addSelectedToppings" text="Add Toppings&gt;&gt;">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="&lt;&lt;Remove Toppings">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                        <Button id="clearToppingsButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="93.0" text="Clear Toppings">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </HBox>
                </children>
             </VBox>
-            <VBox id="viewingBox" fx:id="viewingBox" prefHeight="349.0" prefWidth="222.0">
+            <VBox id="viewingBox" fx:id="viewingBox" alignment="BOTTOM_RIGHT" prefHeight="349.0" prefWidth="262.0">
                <children>
-                  <ImageView id="pizzaView" fx:id="pizzaView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <TextArea id="messageArea" fx:id="messageArea" editable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <ImageView id="pizzaView" fx:id="pizzaView" fitHeight="150.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextArea id="messageArea" fx:id="messageArea" editable="false" prefHeight="137.0" prefWidth="290.0" />
                </children>
             </VBox>
          </children>
