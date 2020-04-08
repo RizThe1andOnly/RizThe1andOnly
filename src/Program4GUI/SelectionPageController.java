@@ -1,5 +1,6 @@
 package Program4GUI;
 
+import PizzaPackage.Pizza;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +12,9 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -41,10 +44,11 @@ public class SelectionPageController implements Initializable {
 
 
     //datamembers to keep track of and ctrl different components:
-    ObservableList<String> pizzaTypes; //list to hold types of pizzas
-    ObservableList<String> pizzaSizes; //list to hold sizes of pizzas
-    ObservableList<String> availableToppings; // list that holds the toppings customers can choose from
-    ObservableList<String> selectedToppings; // list to hold toppings that have been selected by customers
+    private ObservableList<String> pizzaTypes; //list to hold types of pizzas
+    private ObservableList<String> pizzaSizes; //list to hold sizes of pizzas
+    private ObservableList<String> availableToppings; // list that holds the toppings customers can choose from
+    private ObservableList<String> selectedToppings; // list to hold toppings that have been selected by customers
+    private ArrayList<Pizza> currentOrders; // holds the pizza's currently ordered by customer
 
     //required constants:
      //pizza types:
@@ -66,6 +70,9 @@ public class SelectionPageController implements Initializable {
     private final String JALAPENO = "Jalapeno";
     private final String CHICKEN = "Chicken";
     private final String BACON = "Bacon";
+     //limits for number of toppings:
+    private final int MAX_TOPPINGS = 6;
+    private final int MIN_TOPPINGS = 1;
 
 
     /**
@@ -166,11 +173,14 @@ public class SelectionPageController implements Initializable {
      */
     @FXML
     public void addSelectedToppings(ActionEvent e){
+
+        // check if customer has exceed 6 toppings and if yest do not allow any more additions:
+
         ObservableList<String> toppingsBuffer = toppingOptionsListBox.getSelectionModel().getSelectedItems();
         if(!alreadyContainsTopping(toppingsBuffer)){// false is returned when no duplicates
             for(String x:toppingsBuffer){
+
                 selectedToppings.add(x); //adds newly selected items to observable list
-                //may need to manually add to the listview as well, will see !!!
             }
         }
         else{
@@ -178,6 +188,15 @@ public class SelectionPageController implements Initializable {
                                       "selected, duplicates are not allowed, please select again\n toppings" +
                                       " that you have not selected yet.\n");
         }
+    }
+
+
+    /**
+     * Checks to see if the maximum number of toppings is exceeded or not in the selected toppings list
+     * @return true if max number exceeded, false otherwise
+     */
+    private boolean exceedsMaxLimitTopping(){
+
     }
 
 
@@ -239,6 +258,67 @@ public class SelectionPageController implements Initializable {
         else{
             toppingVBoxMain.setDisable(false);
         }
+    }
+
+
+    /**
+     * Once the Add Order button is pressed the current order, as it is (barring errors in order), will be added to
+     * current list of orders for customers.
+     *
+     * @param e Pressing of Add Order button
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    @FXML
+    public void addOrder(ActionEvent e){
+        String style = pizzaTypeBox.getSelectionModel().getSelectedItem();
+        String size  = pizzaSizeBox.getSelectionModel().getSelectedItem();
+        //call diff method based on which style of pizza
+    }
+
+
+    /**
+     * Helper method to create and add a Build Your Own pizza to the current orders.
+     * @param style Build Your Own; used for object creation purposes
+     * @param size how big the pie is: small, medium, large
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    private void addBuildYourOwn(String style, String size){
+        //create and add to arraylist toppings which will be passed to Pizza constructors
+        ArrayList<String> toppings = new ArrayList<>();
+        for(String topping:selectedToppings){
+            toppings.add(topping);
+        }
+
+        // create build your own pizza object: !!!
+
+        // add to the current list after checking if object meets all requirements(if necessary) : !!!
+
+    }
+
+
+    /**
+     * Helper method to create and add a Deluxe pizza object to the current orders
+     * @param style Deluxe, here for object creation purposes
+     * @param size how big the pie is: small, medium, large
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    private void addDeluxe(String style, String size){
+        // !!! NEEDS TO BE COMPLETED
+    }
+
+
+    /**
+     * Helper method to create and add a Hawaiian pizza object to the current orders
+     * @param style Hawaiian, here for object creation purposes
+     * @param size how big the pie is: small, medium, large
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    private void addHawaiian(String style, String size){
+        // !!! NEEDS TO BE COMPLETED
     }
 
 }
