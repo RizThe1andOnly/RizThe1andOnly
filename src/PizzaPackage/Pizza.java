@@ -63,8 +63,8 @@ public abstract class Pizza {
      * @return
      */
     public String toString(){
+        return "this is a "+this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
         /// !!! THIS NEEDS TO BE COMPLETED
-        return "";
     }
 
 }
