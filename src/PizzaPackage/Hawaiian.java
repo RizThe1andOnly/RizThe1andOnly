@@ -11,7 +11,7 @@ package PizzaPackage;
 
 public class Hawaiian extends Pizza {
     // !!! NEEDS TO BE COMPLETED
-
+    private final int Hawaiian_small=8;
     // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
 
     /**
@@ -35,6 +35,13 @@ public class Hawaiian extends Pizza {
      */
     @Override
     public int pizzaPrice() {
+        if(this.size.equals("Small")){
+            return Hawaiian_small;
+        }else  if(this.size.equals("Medium")){
+            return Hawaiian_small+2;
+        }else if(this.size.equals("Large")){
+            return Hawaiian_small+4;
+        }
         // !!! NEEDS TO BE COMPLETED
         return 0;
     }
@@ -47,7 +54,16 @@ public class Hawaiian extends Pizza {
      */
     @Override
     public String toString() {
-        // !!! NEEDS TO BE COMPLETED
-        return "";
+        return this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
+
+
+    }
+    public static void main(String[] args){
+        Hawaiian T1=new Hawaiian("Hawaiian","Small");
+        System.out.println(T1.toString());
+        Hawaiian T2=new Hawaiian("Hawaiian","Medium");
+        System.out.println(T2.toString());
+        Hawaiian T3=new Hawaiian("Hawaiian","Large");
+        System.out.println(T3.toString());
     }
 }
