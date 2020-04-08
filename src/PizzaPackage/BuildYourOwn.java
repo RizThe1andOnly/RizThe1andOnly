@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * @author Tin Fung
  */
 public class BuildYourOwn extends Pizza{
+    private final int BuildYourOwn_small=5;
+    private final int per_Topping=2;
+
     // !!! NEEDS TO BE COMPLETED
     // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
 
@@ -39,6 +42,13 @@ public class BuildYourOwn extends Pizza{
      * @author Tin Fung
      */
     public int pizzaPrice() {
+        if(this.size.equals("Small")){
+            return BuildYourOwn_small+toppings.size()*per_Topping;
+        }else  if(this.size.equals("Medium")){
+            return BuildYourOwn_small+2+toppings.size()*per_Topping;
+        }else if(this.size.equals("Large")){
+            return BuildYourOwn_small+4+toppings.size()*per_Topping;
+        }
         // !!! NEEDS TO BE COMPLETED
         return 0;
     }
@@ -53,7 +63,23 @@ public class BuildYourOwn extends Pizza{
      */
     @Override
     public String toString(){
-        // !!! NEEDS TO BE COMPLETED
-        return "";
+        return this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
+    }
+    public static void main(String[] args){
+        ArrayList<String> tops = new ArrayList<String>();
+
+        BuildYourOwn T1=new BuildYourOwn("BuildYourOwn","Small",tops);
+
+        System.out.println(T1.toString());
+        tops.add("Beef");
+
+        BuildYourOwn T2=new BuildYourOwn("BuildYourOwn","Medium",tops);
+        System.out.println(T2.toString());
+        tops.add("Cheese");
+        tops.add("Green Pepper");
+        tops.add("Chicken");
+
+        BuildYourOwn T3=new BuildYourOwn("BuildYourOwn","Large",tops);
+        System.out.println(T3.toString());
     }
 }
