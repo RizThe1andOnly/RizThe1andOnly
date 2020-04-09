@@ -1,17 +1,25 @@
 package Program4GUI;
 
+import PizzaPackage.BuildYourOwn;
+import PizzaPackage.Deluxe;
+import PizzaPackage.Hawaiian;
 import PizzaPackage.Pizza;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
@@ -84,6 +92,9 @@ public class SelectionPageController implements Initializable {
      */
     public void initialize(URL location, ResourceBundle resource){
 
+        //initialize list of current orders:
+        currentOrders = new ArrayList<>();
+
         setUpComboBoxes();
         setUpToppingOptionLists();
         setUpToppingSelectedLists();
@@ -109,6 +120,15 @@ public class SelectionPageController implements Initializable {
         pizzaSizeBox.setItems(pizzaSizes);
     }
 
+
+    /**
+     * Sets default values for various elements in the gui after certain commands/actions or when the gui first starts.
+     * @author Rizwan Chowdhury
+     */
+    private void setDefaultVals(){
+        pizzaTypeBox.setValue(BUILDOWNPIZZA);
+        pizzaSizeBox.setValue(MEDIUM);
+    }
 
     /**
      * Helper method to set up the initial state and functionalities of the toppingOptionsListBox
@@ -138,15 +158,10 @@ public class SelectionPageController implements Initializable {
     }
 
 
-    /**
-     * Sets default values for various elements in the gui after certain commands/actions or when the gui first starts.
-     * @author Rizwan Chowdhury
-     */
-    private void setDefaultVals(){
-        pizzaTypeBox.setValue(BUILDOWNPIZZA);
-        pizzaSizeBox.setValue(MEDIUM);
-    }
 
+
+
+    //TOPPINGS SECTION:
 
     /**
      * When called will remove all items from the selected toppings list.
@@ -170,16 +185,27 @@ public class SelectionPageController implements Initializable {
      * same topping not allowed checks will be made to make sure this does not happen.
      * @param e The Add Toppings>> being pressed.
      * @author Rizwan Chowdhury
+     * @author Tin Fung
      */
     @FXML
     public void addSelectedToppings(ActionEvent e){
 
         // check if customer has exceed 6 toppings and if yest do not allow any more additions:
+        if(atMaxLimitTopping()){
+            messageArea.appendText("Cannot add any more toppings, at limit of 6.\n");
+            return;
+        }
 
         ObservableList<String> toppingsBuffer = toppingOptionsListBox.getSelectionModel().getSelectedItems();
         if(!alreadyContainsTopping(toppingsBuffer)){// false is returned when no duplicates
-            for(String x:toppingsBuffer){
 
+            //check if number of toppings will go over limit after adding
+            if(toppingsBuffer.size()+selectedToppings.size() > MAX_TOPPINGS){
+                messageArea.appendText("Toppings will exceed max limit of 6.\nPlease select less toppings.\n");
+                return;
+            }
+
+            for(String x:toppingsBuffer){
                 selectedToppings.add(x); //adds newly selected items to observable list
             }
         }
@@ -188,6 +214,8 @@ public class SelectionPageController implements Initializable {
                                       "selected, duplicates are not allowed, please select again\n toppings" +
                                       " that you have not selected yet.\n");
         }
+
+        resetToppingSelection();
     }
 
 
@@ -195,8 +223,11 @@ public class SelectionPageController implements Initializable {
      * Checks to see if the maximum number of toppings is exceeded or not in the selected toppings list
      * @return true if max number exceeded, false otherwise
      */
-    private boolean exceedsMaxLimitTopping(){
-
+    private boolean atMaxLimitTopping(){
+        if(selectedToppings.size() == 6){
+            return true;
+        }
+        return false;
     }
 
 
@@ -237,6 +268,7 @@ public class SelectionPageController implements Initializable {
                 break;
             }
         }
+        resetToppingSelection();
     }
 
 
@@ -262,6 +294,20 @@ public class SelectionPageController implements Initializable {
 
 
     /**
+     * Resets the selected topping selection and available toppings selection after each time a toppings command is pressed
+     * or after selection cleared or something.
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    private void resetToppingSelection(){
+        toppingOptionsListBox.getSelectionModel().clearSelection();
+        toppingSelectedListBox.getSelectionModel().clearSelection();
+    }
+
+
+    //ADD ORDER SECTION:
+
+    /**
      * Once the Add Order button is pressed the current order, as it is (barring errors in order), will be added to
      * current list of orders for customers.
      *
@@ -273,7 +319,16 @@ public class SelectionPageController implements Initializable {
     public void addOrder(ActionEvent e){
         String style = pizzaTypeBox.getSelectionModel().getSelectedItem();
         String size  = pizzaSizeBox.getSelectionModel().getSelectedItem();
-        //call diff method based on which style of pizza
+
+        if(style.equals("Build Your Own")){
+            addBuildYourOwn(style,size);
+        }
+        else if(style.equals("Hawaiian")){
+            addHawaiian(style,size);
+        }
+        else{
+            addDeluxe(style,size);
+        }
     }
 
 
@@ -285,16 +340,22 @@ public class SelectionPageController implements Initializable {
      * @author Tin Fung
      */
     private void addBuildYourOwn(String style, String size){
+        //check if minimum number of toppings added:
+        if(selectedToppings.size() < MIN_TOPPINGS){
+            messageArea.appendText("Please add at least 1 topping.\n\n");
+            return;
+        }
+
         //create and add to arraylist toppings which will be passed to Pizza constructors
         ArrayList<String> toppings = new ArrayList<>();
         for(String topping:selectedToppings){
             toppings.add(topping);
         }
 
-        // create build your own pizza object: !!!
-
-        // add to the current list after checking if object meets all requirements(if necessary) : !!!
-
+        Pizza newBYOPizza = new BuildYourOwn(style,size,toppings);
+        currentOrders.add(newBYOPizza);
+        messageArea.appendText("Build Your Own order added!\n\n");
+        clearSelectedToppings();
     }
 
 
@@ -306,7 +367,9 @@ public class SelectionPageController implements Initializable {
      * @author Tin Fung
      */
     private void addDeluxe(String style, String size){
-        // !!! NEEDS TO BE COMPLETED
+        Pizza newDeluxePizza = new Deluxe(style,size);
+        currentOrders.add(newDeluxePizza);
+        messageArea.appendText("Deluxe order added!\n\n");
     }
 
 
@@ -318,7 +381,56 @@ public class SelectionPageController implements Initializable {
      * @author Tin Fung
      */
     private void addHawaiian(String style, String size){
-        // !!! NEEDS TO BE COMPLETED
+        Pizza newHawaiianPizza = new Hawaiian(style,size);
+        currentOrders.add(newHawaiianPizza);
+        messageArea.appendText("Hawaiian order added!\n\n");
     }
 
+
+    //CLEAR SELECTION SECTION:
+
+    /**
+     * When clear selection button is pressed the current selection will be cleared and re-set to defaults
+     * @param e Clear Selection button being pressed
+     * @author Rizwan Chowdhury
+     */
+    @FXML
+    public void clearSelection(ActionEvent e){
+        selectedToppings.clear();
+        setDefaultVals();
+        messageArea.appendText("Current Selection Cleared.\n\n");
+    }
+
+
+    //VIEW ORDER SECTION:
+
+    /**
+     * Triggered with the press of hte View Orders button, will open the Orders screen and pass list of current orders to the
+     * new window.
+     * @param e Pressing of the View Order button
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    @FXML
+    public void viewOrders(ActionEvent e){
+        try{
+            //obtain parts of order view
+            FXMLLoader viewOrderLoader = new FXMLLoader(getClass().getResource("OrderPage.fxml"));
+            Parent orderViewRoot = viewOrderLoader.load();
+            OrderPageController orderViewController = viewOrderLoader.getController();
+
+            //set up stage basics
+            Stage orderStage = new Stage();
+            orderStage.setTitle("Order View");
+            orderStage.setScene(new Scene(orderViewRoot,400,400));
+
+            //have view order print orders and total price
+            if(orderViewController == null) {messageArea.appendText("NUll bro"); return;}
+            orderViewController.printOrders(currentOrders);
+
+            orderStage.show();
+        }catch (IOException exception){
+            messageArea.appendText("Error in loading view screen, sorry.\n\n");
+        }
+    }
 }

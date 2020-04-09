@@ -10,8 +10,12 @@ package PizzaPackage;
 public class Deluxe extends Pizza {
     private final int Deluxe_small=14;
 
-    // !!! NEEDS TO BE COMPLETED
-    // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
+    //constants for toppings:
+    private final String SAUSAGE = "Sausage";
+    private final String PEPPERONI = "Pepperoni";
+    private final String GREEN_PEPPER = "Green Pepper";
+    private final String ONION = "Onion";
+    private final String MUSHROOM = "Mushroom";
 
     /**
      * Constructs the Deluxe pizza object.
@@ -22,6 +26,11 @@ public class Deluxe extends Pizza {
      */
     public Deluxe(String style, String size){
         super(style,size);
+        this.toppings.add(SAUSAGE);
+        this.toppings.add(PEPPERONI);
+        this.toppings.add(GREEN_PEPPER);
+        this.toppings.add(ONION);
+        this.toppings.add(MUSHROOM);
     }
 
 
@@ -37,9 +46,9 @@ public class Deluxe extends Pizza {
         if(this.size.equals("Small")){
             return Deluxe_small;
         }else  if(this.size.equals("Medium")){
-            return Deluxe_small+2;
+            return Deluxe_small + MEDIUM_ADDITIONAL_FLAT_COST;
         }else if(this.size.equals("Large")){
-            return Deluxe_small+4;
+            return Deluxe_small + LARGE_ADDITIONAL_FLAT_COST;
         }
             // !!! NEEDS TO BE COMPLETED
             return 0;
@@ -55,9 +64,27 @@ public class Deluxe extends Pizza {
      */
     @Override
     public String toString() {
-        return this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
+        String deluxePizzaDetails = this.style + " : " + this.size + "\n"
+                                    + "  Toppings: \n" + generateToppingListString();
+        return deluxePizzaDetails;
 
     }
+
+    /**
+     * Helper method to create list of toppings string to be printed in view orders list.
+     * @return List of toppings
+     * @author Rizwan Chowdhury
+     */
+    private String generateToppingListString(){
+        String toppingList = "";
+        String currentTopping = "";
+        for(String topping : this.toppings){
+            currentTopping = "  ----" + topping + "\n";
+            toppingList = toppingList + currentTopping;
+        }
+        return toppingList;
+    }
+
     public static void main(String[] args){
          Deluxe T1=new Deluxe("Deluxe","Small");
          System.out.println(T1.toString());

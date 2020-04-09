@@ -15,20 +15,24 @@ public abstract class Pizza {
     protected String size;
     protected ArrayList<String> toppings;
 
+    //NECESSARY CONSTANTS : these are consistent across all subclasses so will be put here
+    protected final int MEDIUM_ADDITIONAL_FLAT_COST = 2;
+    protected final int LARGE_ADDITIONAL_FLAT_COST = 4;
+
     /**
      * Creates pizza object with style, size, and toppings. This will be used primarily for
      * Build Your Own pizza style.
      * @param style The type of pizza.
      * @param size How large the pie is: small,medium,large
-     * @param topppings Additional foods placed on the pizza pie
+     * @param toppings Additional foods placed on the pizza pie
      *
      * @author Rizwan Chowdhury
      */
-    public Pizza(String style, String size, ArrayList<String> topppings){
+    public Pizza(String style, String size, ArrayList<String> toppings){
         //initialize the class variables with the parameters
         this.style = style;
         this.size = size;
-        this.toppings = topppings;
+        this.toppings = toppings;
     }
 
 
@@ -44,6 +48,7 @@ public abstract class Pizza {
         //initialize class variables
         this.style = style;
         this.size = size;
+        this.toppings = new ArrayList<>();
     }
 
 
@@ -60,11 +65,12 @@ public abstract class Pizza {
     /**
      * Returns String representation of the Pizza object. This one will return the
      * type and size.
-     * @return
+     * @return String with common characteristics of Pizza styles
+     * @author Tin Fung
      */
     public String toString(){
-        return "this is a "+this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
-        /// !!! THIS NEEDS TO BE COMPLETED
+        String pizzaCommonDetails = this.style + " : " + this.size;
+        return pizzaCommonDetails;
     }
 
 }

@@ -12,11 +12,9 @@ import java.util.ArrayList;
  * @author Tin Fung
  */
 public class BuildYourOwn extends Pizza{
-    private final int BuildYourOwn_small=5;
-    private final int per_Topping=2;
-
-    // !!! NEEDS TO BE COMPLETED
-    // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
+    private final int BUILDYOUROWN_SMALL=5;
+    private final int PER_TOPPING=2;
+    
 
     /**
      * Constructor for the build your own pizza object. With this customer customize their own pizza with available
@@ -43,11 +41,11 @@ public class BuildYourOwn extends Pizza{
      */
     public int pizzaPrice() {
         if(this.size.equals("Small")){
-            return BuildYourOwn_small+toppings.size()*per_Topping;
+            return BUILDYOUROWN_SMALL+toppings.size()*PER_TOPPING;
         }else  if(this.size.equals("Medium")){
-            return BuildYourOwn_small+2+toppings.size()*per_Topping;
+            return BUILDYOUROWN_SMALL+ MEDIUM_ADDITIONAL_FLAT_COST +toppings.size()*PER_TOPPING;
         }else if(this.size.equals("Large")){
-            return BuildYourOwn_small+4+toppings.size()*per_Topping;
+            return BUILDYOUROWN_SMALL+ LARGE_ADDITIONAL_FLAT_COST +toppings.size()*PER_TOPPING;
         }
         // !!! NEEDS TO BE COMPLETED
         return 0;
@@ -63,8 +61,27 @@ public class BuildYourOwn extends Pizza{
      */
     @Override
     public String toString(){
-        return this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
+        String byoPizzaDetails = this.style + " : " + this.size + "\n"
+                                 +"  Toppings: \n" + generateToppingListString();
+        return byoPizzaDetails;
     }
+
+
+    /**
+     * Helper method to create list of toppings string to be printed in view orders list.
+     * @return List of toppings
+     * @author Rizwan Chowdhury
+     */
+    private String generateToppingListString(){
+        String toppingList = "";
+        String currentTopping = "";
+        for(String topping : this.toppings){
+            currentTopping = "  ----" + topping + "\n";
+            toppingList = toppingList + currentTopping;
+        }
+        return toppingList;
+    }
+
     public static void main(String[] args){
         ArrayList<String> tops = new ArrayList<String>();
 

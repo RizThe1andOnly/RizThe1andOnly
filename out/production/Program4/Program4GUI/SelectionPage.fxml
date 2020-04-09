@@ -10,9 +10,9 @@
    <children>
       <HBox id="commandButtonBox" fx:id="commandButtonBox" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Button id="addButton" fx:id="addButton" mnemonicParsing="false" text="Add Order" />
-            <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" text="Clear Order" />
-            <Button id="viewOrderButton" fx:id="viewOrderButton" mnemonicParsing="false" text="View Orders" />
+            <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#addOrder" text="Add Order" />
+            <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" onAction="#clearSelection" text="Clear Selection" />
+            <Button id="viewOrderButton" fx:id="viewOrderButton" mnemonicParsing="false" onAction="#viewOrders" text="View Orders" />
             <Button id="doneButton" fx:id="doneButton" mnemonicParsing="false" text="Done" />
          </children>
          <opaqueInsets>

@@ -11,7 +11,12 @@ package PizzaPackage;
 
 public class Hawaiian extends Pizza {
     // !!! NEEDS TO BE COMPLETED
-    private final int Hawaiian_small=8;
+    private final int HAWAIIAN_SMALL=8;
+
+    //Constants for toppings:
+    private final String HAM = "Ham";
+    private final String PINEAPPLE = "Pineapple";
+
     // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
 
     /**
@@ -24,6 +29,8 @@ public class Hawaiian extends Pizza {
      */
     public Hawaiian(String style, String size){
         super(style, size);
+        this.toppings.add(HAM);
+        this.toppings.add(PINEAPPLE);
     }
 
 
@@ -36,11 +43,11 @@ public class Hawaiian extends Pizza {
     @Override
     public int pizzaPrice() {
         if(this.size.equals("Small")){
-            return Hawaiian_small;
+            return HAWAIIAN_SMALL;
         }else  if(this.size.equals("Medium")){
-            return Hawaiian_small+2;
+            return HAWAIIAN_SMALL+ MEDIUM_ADDITIONAL_FLAT_COST;
         }else if(this.size.equals("Large")){
-            return Hawaiian_small+4;
+            return HAWAIIAN_SMALL+ LARGE_ADDITIONAL_FLAT_COST;
         }
         // !!! NEEDS TO BE COMPLETED
         return 0;
@@ -54,10 +61,27 @@ public class Hawaiian extends Pizza {
      */
     @Override
     public String toString() {
-        return this.style+" pizza with a "+this.size+" size and the prize is $"+this.pizzaPrice()+" dollars.";
-
-
+        String hawaiianPizzaDetails = this.style + " : " + this.size + "\n"
+                                      +"  Toppings: \n"+ generateToppingListString();
+        return hawaiianPizzaDetails;
     }
+
+
+    /**
+     * Helper method to create list of toppings string to be printed in view orders list.
+     * @return List of toppings
+     * @author Rizwan Chowdhury
+     */
+    private String generateToppingListString(){
+        String toppingList = "";
+        String currentTopping = "";
+        for(String topping : this.toppings){
+            currentTopping = "  ----" + topping + "\n";
+            toppingList = toppingList + currentTopping;
+        }
+        return toppingList;
+    }
+
     public static void main(String[] args){
         Hawaiian T1=new Hawaiian("Hawaiian","Small");
         System.out.println(T1.toString());
