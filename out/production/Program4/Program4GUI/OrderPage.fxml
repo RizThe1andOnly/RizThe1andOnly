@@ -4,18 +4,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program4GUI.OrderPageController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program4GUI.OrderPageController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
          <children>
-            <Label text="Orders:" />
+            <Label text="Orders:">
+               <padding>
+                  <Insets right="150.0" />
+               </padding></Label>
+            <Button mnemonicParsing="false" onAction="#clearCurrentOrdersList" text="Clear Order" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#closeViewOrderPage" text="Back" />
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </HBox>
-      <TextArea fx:id="orderListTextArea" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="orderListTextArea" editable="false" prefHeight="392.0" prefWidth="446.0" />
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Total: " />
-            <TextField fx:id="totalPriceField" />
+            <TextField fx:id="totalPriceField" editable="false" />
          </children>
          <opaqueInsets>
             <Insets />

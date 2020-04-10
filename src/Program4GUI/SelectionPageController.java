@@ -281,14 +281,36 @@ public class SelectionPageController implements Initializable {
      * @author Rizwan Chowdhury
      */
     @FXML
-    public void lockToppings(ActionEvent e){
+    public void readjustToppings(ActionEvent e){
         String pizzastyle = pizzaTypeBox.getSelectionModel().getSelectedItem();
         clearSelectedToppings();
         if( (pizzastyle.equals(HAWAIIAN)) || (pizzastyle.equals(DELUXE)) ){
             toppingVBoxMain.setDisable(true);
+            setPresetToppings(pizzastyle);
         }
         else{
             toppingVBoxMain.setDisable(false);
+        }
+    }
+
+
+    /**
+     * Helper method to set preset toppings to selected toppings list for Hawaiian and Deluxe pizza
+     * @param style Hawaiian or Deluxe, the style for which preset toppings are to be set
+     * @author Rizwan Chowdhury
+     * @author Tin Fung
+     */
+    private void setPresetToppings(String style){
+        if(style.equals(HAWAIIAN)){
+            selectedToppings.add(HAM);
+            selectedToppings.add(PINEAPPLE);
+        }
+        else{
+            selectedToppings.add(SAUSAGE);
+            selectedToppings.add(PEPPERONI);
+            selectedToppings.add(GREEN_PEPPER);
+            selectedToppings.add(ONION);
+            selectedToppings.add(MUSHROOM);
         }
     }
 
@@ -356,6 +378,7 @@ public class SelectionPageController implements Initializable {
         currentOrders.add(newBYOPizza);
         messageArea.appendText("Build Your Own order added!\n\n");
         clearSelectedToppings();
+        setDefaultVals();
     }
 
 
@@ -370,6 +393,7 @@ public class SelectionPageController implements Initializable {
         Pizza newDeluxePizza = new Deluxe(style,size);
         currentOrders.add(newDeluxePizza);
         messageArea.appendText("Deluxe order added!\n\n");
+        setDefaultVals();
     }
 
 
@@ -384,6 +408,7 @@ public class SelectionPageController implements Initializable {
         Pizza newHawaiianPizza = new Hawaiian(style,size);
         currentOrders.add(newHawaiianPizza);
         messageArea.appendText("Hawaiian order added!\n\n");
+        setDefaultVals();
     }
 
 
