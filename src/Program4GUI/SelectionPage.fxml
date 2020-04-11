@@ -27,14 +27,14 @@
             <VBox id="pizzaSelectionSection" fx:id="pizzaSelectionSection" alignment="BOTTOM_LEFT" prefHeight="349.0" prefWidth="314.0">
                <children>
                   <GridPane id="pizzaSelectionGridPane" fx:id="pizzaSelectionGridPane">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="131.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" prefWidth="149.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="131.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" prefWidth="149.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <ComboBox id="pizzaTypeBox" fx:id="pizzaTypeBox" onAction="#readjustToppings" prefWidth="150.0" GridPane.columnIndex="1" />
                         <ComboBox id="pizzaSizeBox" fx:id="pizzaSizeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -47,6 +47,7 @@
                               <Insets left="5.0" />
                            </padding></Label>
                      </children>
+
                      <padding>
                         <Insets bottom="10.0" left="24.0" />
                      </padding>
@@ -83,6 +84,12 @@
                   </VBox>
                </children>
             </VBox>
+            <VBox fx:id="image"  alignment="BASELINE_RIGHT" prefHeight="100.0" prefWidth="100.0">
+               <children><ImageView fx:id="testing1"  fitHeight="100.0" fitWidth="100.0"  pickOnBounds="true" preserveRatio="true"></ImageView>
+
+               </children>
+            </VBox>
+
             <VBox id="viewingBox" fx:id="viewingBox" alignment="BOTTOM_RIGHT" prefHeight="349.0" prefWidth="262.0">
                <children>
                   <ImageView id="pizzaView" fx:id="pizzaView" fitHeight="150.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" />
