@@ -16,8 +16,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -50,7 +53,12 @@ public class SelectionPageController implements Initializable {
     @FXML
     private TextArea messageArea;
 
+    @FXML
+    private ImageView testing1;
 
+    private Image image1=new Image("https://upload.wikimedia.org/wikipedia/commons/8/82/Cheesy_crust_pizza.jpg");
+    private Image image2=new Image("https://i.cbc.ca/1.3993184.1583946118!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/hawaiian-pizza-pineapple-pizza.jpg");
+    private Image image3=new Image("https://upload.wikimedia.org/wikipedia/commons/3/38/Mmmm..._Pizza_%2857033748%29.jpg");
     //datamembers to keep track of and ctrl different components:
     private ObservableList<String> pizzaTypes; //list to hold types of pizzas
     private ObservableList<String> pizzaSizes; //list to hold sizes of pizzas
@@ -59,15 +67,15 @@ public class SelectionPageController implements Initializable {
     private ArrayList<Pizza> currentOrders; // holds the pizza's currently ordered by customer
 
     //required constants:
-     //pizza types:
+    //pizza types:
     private final String BUILDOWNPIZZA = "Build Your Own";
     private final String HAWAIIAN = "Hawaiian";
     private final String DELUXE = "Deluxe";
-     //pizza sizes:
+    //pizza sizes:
     private final String SMALL = "Small";
     private final String MEDIUM = "Medium";
     private final String LARGE = "Large";
-     //pizza toppings:
+    //pizza toppings:
     private final String SAUSAGE = "Sausage";
     private final String PEPPERONI = "Pepperoni";
     private final String GREEN_PEPPER = "Green Pepper";
@@ -78,7 +86,7 @@ public class SelectionPageController implements Initializable {
     private final String JALAPENO = "Jalapeno";
     private final String CHICKEN = "Chicken";
     private final String BACON = "Bacon";
-     //limits for number of toppings:
+    //limits for number of toppings:
     private final int MAX_TOPPINGS = 6;
     private final int MIN_TOPPINGS = 1;
 
@@ -94,11 +102,10 @@ public class SelectionPageController implements Initializable {
 
         //initialize list of current orders:
         currentOrders = new ArrayList<>();
-
+        testing1.setImage(image1);
         setUpComboBoxes();
         setUpToppingOptionLists();
         setUpToppingSelectedLists();
-
         //set defaults
         setDefaultVals();
     }
@@ -211,8 +218,8 @@ public class SelectionPageController implements Initializable {
         }
         else{
             messageArea.appendText("One or more of the toppings you have selected are already\n " +
-                                      "selected, duplicates are not allowed, please select again\n toppings" +
-                                      " that you have not selected yet.\n");
+                    "selected, duplicates are not allowed, please select again\n toppings" +
+                    " that you have not selected yet.\n");
         }
 
         resetToppingSelection();
@@ -286,10 +293,22 @@ public class SelectionPageController implements Initializable {
         clearSelectedToppings();
         if( (pizzastyle.equals(HAWAIIAN)) || (pizzastyle.equals(DELUXE)) ){
             toppingVBoxMain.setDisable(true);
+
             setPresetToppings(pizzastyle);
-        }
+            if(pizzastyle.equals(HAWAIIAN)){
+                testing1.setImage(image2);
+            }
+            if(pizzastyle.equals(DELUXE)){
+                testing1.setImage(image3);
+
+
+            }
+            //
+            }
         else{
             toppingVBoxMain.setDisable(false);
+            testing1.setImage(image1);
+
         }
     }
 
