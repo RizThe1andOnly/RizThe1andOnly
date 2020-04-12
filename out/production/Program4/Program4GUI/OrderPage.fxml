@@ -8,10 +8,6 @@
    <children>
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
          <children>
-            <Label text="Orders:">
-               <padding>
-                  <Insets right="150.0" />
-               </padding></Label>
             <Button mnemonicParsing="false" onAction="#clearCurrentOrdersList" text="Clear Order" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#closeViewOrderPage" text="Back" />
          </children>

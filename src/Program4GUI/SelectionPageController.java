@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -53,12 +54,14 @@ public class SelectionPageController implements Initializable {
     @FXML
     private TextArea messageArea;
 
+    //image related constants and items
     @FXML
-    private ImageView testing1;
+    private ImageView pizzaView;
+    private final Image DELUXE_PIZZA_IMAGE = new Image("file:src/Images/DeluxePizza.jpg");
+    private final Image HAWAIIAN_PIZZA_IMAGE = new Image("file:src/Images/HawaiianPizza.jpg");
+    private final Image BUILD_YOUR_OWN_IMAGE = new Image("file:src/Images/BuildYourOwnPizza.jpg");
 
-    private Image image1=new Image("https://upload.wikimedia.org/wikipedia/commons/8/82/Cheesy_crust_pizza.jpg");
-    private Image image2=new Image("https://i.cbc.ca/1.3993184.1583946118!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/hawaiian-pizza-pineapple-pizza.jpg");
-    private Image image3=new Image("https://upload.wikimedia.org/wikipedia/commons/3/38/Mmmm..._Pizza_%2857033748%29.jpg");
+
     //datamembers to keep track of and ctrl different components:
     private ObservableList<String> pizzaTypes; //list to hold types of pizzas
     private ObservableList<String> pizzaSizes; //list to hold sizes of pizzas
@@ -102,7 +105,6 @@ public class SelectionPageController implements Initializable {
 
         //initialize list of current orders:
         currentOrders = new ArrayList<>();
-        testing1.setImage(image1);
         setUpComboBoxes();
         setUpToppingOptionLists();
         setUpToppingSelectedLists();
@@ -135,6 +137,7 @@ public class SelectionPageController implements Initializable {
     private void setDefaultVals(){
         pizzaTypeBox.setValue(BUILDOWNPIZZA);
         pizzaSizeBox.setValue(MEDIUM);
+        pizzaView.setImage(BUILD_YOUR_OWN_IMAGE);
     }
 
     /**
@@ -217,9 +220,7 @@ public class SelectionPageController implements Initializable {
             }
         }
         else{
-            messageArea.appendText("One or more of the toppings you have selected are already\n " +
-                    "selected, duplicates are not allowed, please select again\n toppings" +
-                    " that you have not selected yet.\n");
+            messageArea.appendText("Only 1 of each topping allowed.\n");
         }
 
         resetToppingSelection();
@@ -293,22 +294,17 @@ public class SelectionPageController implements Initializable {
         clearSelectedToppings();
         if( (pizzastyle.equals(HAWAIIAN)) || (pizzastyle.equals(DELUXE)) ){
             toppingVBoxMain.setDisable(true);
-
             setPresetToppings(pizzastyle);
             if(pizzastyle.equals(HAWAIIAN)){
-                testing1.setImage(image2);
+                pizzaView.setImage(HAWAIIAN_PIZZA_IMAGE);
             }
             if(pizzastyle.equals(DELUXE)){
-                testing1.setImage(image3);
-
-
+                pizzaView.setImage(DELUXE_PIZZA_IMAGE);
             }
-            //
-            }
+        }
         else{
             toppingVBoxMain.setDisable(false);
-            testing1.setImage(image1);
-
+            pizzaView.setImage(BUILD_YOUR_OWN_IMAGE);
         }
     }
 
@@ -476,5 +472,18 @@ public class SelectionPageController implements Initializable {
         }catch (IOException exception){
             messageArea.appendText("Error in loading view screen, sorry.\n\n");
         }
+    }
+
+
+    //DONE BUTTON Programming
+
+    /**
+     * Pressing of the Done button will close the entire program
+     * @param e Pressing of the done button, will also contain info on the done button
+     */
+    @FXML
+    public void doneAction(ActionEvent e){
+        Stage thisStage = (Stage)((Button)e.getSource()).getScene().getWindow();
+        thisStage.close();
     }
 }

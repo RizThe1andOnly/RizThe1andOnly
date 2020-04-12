@@ -7,17 +7,13 @@ package PizzaPackage;
  * @author Rizwan Chowdhury
  * @author Tin Fung
  */
-
-
 public class Hawaiian extends Pizza {
-    // !!! NEEDS TO BE COMPLETED
     private final int HAWAIIAN_SMALL=8;
 
     //Constants for toppings:
     private final String HAM = "Ham";
     private final String PINEAPPLE = "Pineapple";
 
-    // NOTE THAT THE PROTECTED VARIABLES ARE AVAILABLE HERE SO DON'T NEED TO RE-CREATE THEM HERE
 
     /**
      * Constructs the Hawaiian pizza object.
@@ -49,7 +45,6 @@ public class Hawaiian extends Pizza {
         }else if(this.size.equals("Large")){
             return HAWAIIAN_SMALL+ LARGE_ADDITIONAL_FLAT_COST;
         }
-        // !!! NEEDS TO BE COMPLETED
         return 0;
     }
 
@@ -82,12 +77,4 @@ public class Hawaiian extends Pizza {
         return toppingList;
     }
 
-    public static void main(String[] args){
-        Hawaiian T1=new Hawaiian("Hawaiian","Small");
-        System.out.println(T1.toString());
-        Hawaiian T2=new Hawaiian("Hawaiian","Medium");
-        System.out.println(T2.toString());
-        Hawaiian T3=new Hawaiian("Hawaiian","Large");
-        System.out.println(T3.toString());
-    }
 }

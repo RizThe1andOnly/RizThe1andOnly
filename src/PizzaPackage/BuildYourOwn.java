@@ -1,7 +1,5 @@
 package PizzaPackage;
 
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 /**
@@ -82,21 +80,4 @@ public class BuildYourOwn extends Pizza{
         return toppingList;
     }
 
-    public static void main(String[] args){
-        ArrayList<String> tops = new ArrayList<String>();
-
-        BuildYourOwn T1=new BuildYourOwn("BuildYourOwn","Small",tops);
-
-        System.out.println(T1.toString());
-        tops.add("Beef");
-
-        BuildYourOwn T2=new BuildYourOwn("BuildYourOwn","Medium",tops);
-        System.out.println(T2.toString());
-        tops.add("Cheese");
-        tops.add("Green Pepper");
-        tops.add("Chicken");
-
-        BuildYourOwn T3=new BuildYourOwn("BuildYourOwn","Large",tops);
-        System.out.println(T3.toString());
-    }
 }

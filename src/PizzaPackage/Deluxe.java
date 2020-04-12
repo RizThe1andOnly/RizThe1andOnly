@@ -50,11 +50,8 @@ public class Deluxe extends Pizza {
         }else if(this.size.equals("Large")){
             return Deluxe_small + LARGE_ADDITIONAL_FLAT_COST;
         }
-            // !!! NEEDS TO BE COMPLETED
             return 0;
     }
-        // !!! NEEDS TO BE COMPLETED
-
 
     /**
      * Returns string representation of object containing information regarding the deluxe pie.
@@ -85,12 +82,4 @@ public class Deluxe extends Pizza {
         return toppingList;
     }
 
-    public static void main(String[] args){
-         Deluxe T1=new Deluxe("Deluxe","Small");
-         System.out.println(T1.toString());
-        Deluxe T2=new Deluxe("Deluxe","Medium");
-        System.out.println(T2.toString());
-        Deluxe T3=new Deluxe("Deluxe","Large");
-        System.out.println(T3.toString());
-    }
 }

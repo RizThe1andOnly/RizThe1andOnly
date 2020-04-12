@@ -13,7 +13,7 @@
             <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#addOrder" text="Add Order" />
             <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" onAction="#clearSelection" text="Clear Selection" />
             <Button id="viewOrderButton" fx:id="viewOrderButton" mnemonicParsing="false" onAction="#viewOrders" text="View Orders" />
-            <Button id="doneButton" fx:id="doneButton" mnemonicParsing="false" text="Done" />
+            <Button id="doneButton" fx:id="doneButton" mnemonicParsing="false" onAction="#doneAction" text="Done" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -84,15 +84,10 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox fx:id="image"  alignment="BASELINE_RIGHT" prefHeight="100.0" prefWidth="100.0">
-               <children><ImageView fx:id="testing1"  fitHeight="100.0" fitWidth="100.0"  pickOnBounds="true" preserveRatio="true"></ImageView>
-
-               </children>
-            </VBox>
 
             <VBox id="viewingBox" fx:id="viewingBox" alignment="BOTTOM_RIGHT" prefHeight="349.0" prefWidth="262.0">
                <children>
-                  <ImageView id="pizzaView" fx:id="pizzaView" fitHeight="150.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView id="pizzaView" fx:id="pizzaView" fitHeight="212.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" />
                   <TextArea id="messageArea" fx:id="messageArea" editable="false" prefHeight="137.0" prefWidth="290.0" />
                </children>
             </VBox>
